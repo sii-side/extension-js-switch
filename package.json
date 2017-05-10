@@ -1,0 +1,7 @@
+{
+  "name": "js-switch",
+  "version": "1.0.0",
+  "description": "Google Chrome extension to toggle JavaScript ON/OFF",
+  "author": "sii",
+  "license": "MIT"
+}

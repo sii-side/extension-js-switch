@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "JS Switch",
+  "version": "0.0.1",
+  "description": "Toggle JavaScript ON/OFF globally.",
+  "author": "sii",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png"
+    },
+    "default_title": "JS Switch",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["./js/background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "contentSettings", "tabs"
+  ]
+}

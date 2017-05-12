@@ -1,0 +1,13 @@
+{
+  "name": "JS-Switch",
+  "version": "0.0.2",
+  "description": "Chrome extension to toggle JavaScript ON/OFF globally.",
+  "scripts": {
+    "build": "babel src/js -d extension/js --no-comments"
+  },
+  "author": "sii",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "*"
+  }
+}

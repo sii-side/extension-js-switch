@@ -1,38 +1,31 @@
-(() => {
-  const showMessage = message => {
+'use strict';
+
+(function () {
+  var showMessage = function showMessage(message) {
     document.querySelector('.result').innerHTML = message;
   };
 
-  /**
-   * (1) get
-   * (2) set
-   * (3) icon・popup・reload
-   */
-  return new Promise((resolve, reject) => {  //(1)
+  return new Promise(function (resolve, reject) {
     chrome.contentSettings.javascript.get({
-      //glocalの設定をgetするためあり得ないURLにする
-      // - 例外設定に該当するURLがあるとそちらの設定をgetしてしまう
-      // - patternではないので <all_urls> や * は使えない
       primaryUrl: 'http://k2r29fjafjsdfjlj2qf39fqjasdlfkajsdlfkff49fdas'
-    }, details => {
+    }, function (details) {
       resolve(details);
     });
-  }).then(details => {
-    return new Promise((resolve, reject) => {  //(2)
-      const isAllowJS = details.setting === 'allow';
+  }).then(function (details) {
+    return new Promise(function (resolve, reject) {
+      var isAllowJS = details.setting === 'allow';
       chrome.contentSettings.javascript.set({
         setting: isAllowJS ? 'block' : 'allow',
         primaryPattern: '<all_urls>'
-      }, () => {
+      }, function () {
         resolve(isAllowJS);
       });
     });
-  }).then(isAllowJS => {  //(3)
-    //アイコンの変更を促す
+  }).then(function (isAllowJS) {
     chrome.runtime.sendMessage('changed');
-    //popupにメッセージ表示
-    showMessage(`JavaScript was turned <strong>${isAllowJS ? 'OFF' : 'ON'}</strong>.`);
-    //current tabのreload
+
+    showMessage('JavaScript was turned <strong>' + (isAllowJS ? 'OFF' : 'ON') + '</strong>.');
+
     chrome.tabs.reload();
   });
 })();
